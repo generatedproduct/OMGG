@@ -1,0 +1,166 @@
+pip install pygame
+import pygame
+import sys
+
+# Initialize Pygame
+pygame.init()
+
+# Screen dimensions
+SCREEN_WIDTH, SCREEN_HEIGHT = 800, 600
+screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+
+# Colors
+WHITE = (255, 255, 255)
+BLUE = (0, 0, 255)
+BLACK = (0, 0, 0)
+
+# Ship settings
+ship_width, ship_height = 40, 20
+ship_x = SCREEN_WIDTH // 2 - ship_width // 2
+ship_y = SCREEN_HEIGHT - ship_height - 10
+ship_speed = 5
+
+# Bullet settings
+bullet_width, bullet_height = 2, 10
+bullet_speed = 7
+bullets = []
+
+# Target settings
+target_radius = 20
+targets = []
+for i in range(5):  # 5 rows
+    for j in range(4):  # 4 targets per row
+        targets.append(pygame.Rect(100 + j * 150, 50 + i * 50, target_radius * 2, target_radius * 2))
+
+# Score
+score = 0
+
+# Game loop
+running = True
+while running:
+    screen.fill(BLACK)
+
+    # Event handling
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+        elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_SPACE:
+                # Create a new bullet
+                bullets.append(pygame.Rect(ship_x + ship_width // 2, ship_y, bullet_width, bullet_height))
+
+    # Key states for continuous movement
+    keys = pygame.key.get_pressed()
+    if keys[pygame.K_LEFT]:
+        ship_x -= ship_speed
+    if keys[pygame.K_RIGHT]:
+        ship_x += ship_speed
+
+    # Keep the ship within screen bounds
+    ship_x = max(0, min(SCREEN_WIDTH - ship_width, ship_x))
+
+    # Draw the ship
+    pygame.draw.rect(screen, WHITE, (ship_x, ship_y, ship_width, ship_height))
+
+    # Update and draw bullets
+    for bullet in bullets[:]:
+        bullet.y -= bullet_speed
+        if bullet.y < 0:
+            bullets.remove(bullet)
+        pygame.draw.rect(screen, WHITE, bullet)
+
+    # Check for bullet collisions with targets
+    for target in targets[:]:
+        for bullet in bullets[:]:
+            if target.colliderect(bullet):
+                targets.remove(target)
+                bullets.remove(bullet)
+                score += 1
+                break  # Break to avoid modifying list during iteration
+
+    # Draw targets
+    for target in targets:
+        pygame.draw.ellipse(screen, BLUE, target)
+
+    # Display score
+    font = pygame.font.Font(None, 36)
+    text = font.render(f'Score: {score}', 1, WHITE)
+    screen.blit(text, (10, 10))
+
+    pygame.display.flip()
+    pygame.time.Clock().tick(60)
+
+pygame.quit()
+sys.exit()
+
+
+
+
+
+
+
+
+
+
+
+
+import pygame
+
+# Initialize Pygame mixer
+pygame.mixer.init()
+shoot_sound = pygame.mixer.Sound('/path/to/OMGG-sound-affects_mixdown.wav')
+
+
+shoot_sound.play()
+
+
+logo = pygame.image.load('/path/to/LOGO-OMGG.png')
+logo_rect = logo.get_rect(topleft=(10, 10))  # Position it at the top-left corner
+
+
+screen.blit(logo, logo_rect)
+
+
+target01 = pygame.image.load('/path/to/enemy-target01.png')
+target02 = pygame.image.load('/path/to/OOMGG-enemytarget02.png')
+target03 = pygame.image.load('/path/to/OMGG-enemytarget03-red.png')
+
+ship = pygame.image.load('/path/to/omgg-ship-smaller.png')
+ship_rect = ship.get_rect(midbottom=(SCREEN_WIDTH // 2, SCREEN_HEIGHT))
+screen.blit(ship, ship_rect)
+
+bullet = pygame.Rect(ship_rect.centerx, ship_rect.top, 2, 10)  # Adjust width and height as needed
+
+# Game initialization code...
+
+# Load assets
+logo = pygame.image.load('/path/to/LOGO-OMGG.png')
+ship = pygame.image.load('/path/to/omgg-ship-smaller.png')
+target01 = pygame.image.load('/path/to/enemy-target01.png')
+target02 = pygame.image.load('/path/to/OOMGG-enemytarget02.png')
+target03 = pygame.image.load('/path/to/OMGG-enemytarget03-red.png')
+shoot_sound = pygame.mixer.Sound('/path/to/OMGG-sound-affects_mixdown.wav')
+
+# Game loop
+running = True
+while running:
+    # Event handling code...
+    
+    # Draw the logo
+    screen.blit(logo, (10, 10))
+    
+    # Draw the ship
+    screen.blit(ship, ship_rect)
+    
+    # Update and draw bullets
+    # If a bullet is fired:
+    shoot_sound.play()
+    
+    # Update and draw targets
+    # Choose target01, target02, or target03 based on the level
+
+    pygame.display.flip()
+    pygame.time.Clock().tick(60)
+
+# Rest of the game loop and exit code...
+
