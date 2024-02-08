@@ -1,0 +1,40 @@
+{
+  "playerShip": {
+    "position": {
+      "x": 50,
+      "y": 90
+    },
+    "sprite": "path/to/ship_sprite.png",
+    "projectile": {
+      "speed": 30,
+      "sprite": "path/to/projectile_sprite.png"
+    }
+  },
+  "targets": {
+    "rows": 5,
+    "perRow": 4,
+    "sprite": "path/to/target_sprite.png",
+    "initialPositions": [
+      {"x": 10, "y": 10},
+      {"x": 20, "y": 10},
+      {"x": 30, "y": 10},
+      {"x": 40, "y": 10},
+      {"x": 10, "y": 20},
+      {"x": 20, "y": 20},
+      {"x": 30, "y": 20},
+      {"x": 40, "y": 20},
+      {"x": 10, "y": 30},
+      {"x": 20, "y": 30},
+      {"x": 30, "y": 30},
+      {"x": 40, "y": 30},
+      {"x": 10, "y": 40},
+      {"x": 20, "y": 40},
+      {"x": 30, "y": 40},
+      {"x": 40, "y": 40},
+      {"x": 10, "y": 50},
+      {"x": 20, "y": 50},
+      {"x": 30, "y": 50},
+      {"x": 40, "y": 50}
+    ]
+  }
+}
